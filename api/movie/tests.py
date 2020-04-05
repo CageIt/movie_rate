@@ -3,11 +3,11 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework.test import APITestCase, APIClient
 from rest_framework.views import status
-from .models import movie
-from .serializers import MovieSerializer
+from .models import Movies
+from .serializers import MoviesSerializer
 
 # Create your tests here.
-class BaseViewTest(APITestCase()):
+class BaseViewTest(APITestCase):
     client = APIClient()
 
     @staticmethod
@@ -29,17 +29,19 @@ class BaseViewTest(APITestCase()):
         self.create_movie("Fantastic Beasts: The Crimes of Grindelwald", "David Yates")
 
 class GetAllMoviesTest(BaseViewTest):
-    """
-    This test ensures that all movies added in the setUp method
-    exist when we make a GET request to the movies.
-    """
-    #hit the API endpoint
-    response = self.client.get(
-        reverse("movies-all", kwargs={"version": "v1"})
-    )
 
-    # fetch the data from database
-    expected = Movies.objects.all()
-    serialized = MoviesSerializer(expected, many=True)
-    self.assertEqual(response.data, serialized.data)
-    self.assertEqual(response.status_code, status.HTTP_200_OK)
+    def test_all_movies(self):
+        """
+        This test ensures that all movies added in the setUp method
+        exist when we make a GET request to the movies.
+        """
+        #hit the API endpoint
+        response = self.client.get(
+            reverse("movies-all", kwargs={"version": "v1"})
+        )
+
+        # fetch the data from database
+        expected = Movies.objects.all()
+        serialized = MoviesSerializer(expected, many=True)
+        self.assertEqual(response.data, serialized.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
