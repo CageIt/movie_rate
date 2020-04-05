@@ -4,7 +4,7 @@ from django.urls import reverse
 from rest_framework.test import APITestCase, APIClient
 from rest_framework.views import status
 from .models import Movies
-from .serializers import MoviesSerializer
+from .serializers import MovieSerializer
 
 # Create your tests here.
 class BaseViewTest(APITestCase):
