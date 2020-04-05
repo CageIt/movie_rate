@@ -1,3 +1,4 @@
+# api/setting.py
 """
 Django settings for api project.
 
@@ -37,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'movie',
 ]
 
 MIDDLEWARE = [
