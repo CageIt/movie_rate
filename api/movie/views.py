@@ -6,58 +6,63 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
-from .models import Movies, Discussions
+from .models import *
 from .permissions import IsOwnerOrReadOnly
-from .serializers import MovieSerializer, UserSerializer, CommentSerializer
-
+from .serializers import *
 # Create your views here.
-
-
-
-
 @api_view(['GET'])
 def api_root(request, format=None):
     return Response({
         'users': reverse('user-list', request=request, format=format),
         'movies': reverse('movie-list', request=request, format=format),
-
-
-
     })
 
-class ListMoviesView(generics.ListCreateAPIView):
+class ListMoviesView(generics.ListAPIView):
     """
     Provides a get method handler
     """
     queryset = Movies.objects.all()
-    serializer_class = MovieSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    serializer_class = MovieListSerialzier
 
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
 
-class MoviesDetail(generics.RetrieveUpdateDestroyAPIView):
+class MoviesDetail(generics.RetrieveAPIView):
     queryset = Movies.objects.all()
     serializer_class = MovieSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
-
-
 
 class DiscussionList(generics.ListCreateAPIView):
-    serializer_class = CommentSerializer(queryset, many=True)
+    serializer_class = CommentSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     def get_queryset(self):
-        token = self.kwargs['number']
-        query_set = Discussions.objects.filter(movie=token)
+        token = self.kwargs['pk']
+        query_set = Discussions.objects.filter(movie_id=token)
         return query_set
 
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        serializer.save(
+            user=self.request.user,
+            movie_id = self.kwargs.get('pk'),
+        )
+
+
+class ReviewList(generics.ListCreateAPIView):
+    serializer_class = RatingSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def get_queryset(self):
+        token = self.kwargs['pk']
+        queryset = feedback.objects.filter(movie_id=token)
+        return queryset
+
+    def perform_create(self, serializer):
+        serializer.save(
+            user=self.request.user,
+            movie_id = self.kwargs.get('pk'),
+        )
 
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserListSerialziers
 
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()

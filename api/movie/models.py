@@ -22,26 +22,48 @@ class Movies(models.Model):
     # added by admin
     owner = models.ForeignKey('auth.User', related_name='movies', on_delete=models.CASCADE)
 
-    #rating  = models.ForeignKey('reviews', on_delete=models.SET_DEFAULT, null=True, default="NA" )
-    comments = models.ForeignKey('discussions', related_name='movies',on_delete=models.SET_DEFAULT, null=True, blank=True, default="NA")
+    #reviews  = models.ForeignKey('feedback', on_delete=models.SET_DEFAULT, null=True, default="NA" )
+    #comments = models.ForeignKey('discussions', on_delete=models.SET_DEFAULT, null=True, default="NA")
 
     class Meta:
         ordering = ('created', )
 
     def __str__(self):
-        return '{} directed by {} '.format(self.title, self.director)
+        return self.title
 
 
 
 class Discussions(models.Model):
 
 
-    user = models.ForeignKey('auth.User', related_name='discussions', on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movies, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movies, related_name='comments', on_delete=models.CASCADE)
     discuss = models.TextField(blank=True)
 
-    
+    # uploaded Date
+    created = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ('created', )
+        unique_together = ['movie', 'discuss']
 
     def __str__(self):
-        return '{} commented on {}'. format(self.user, self.movie)
+        return '{}: {} '.format(self.user, self.discuss)
+
+
+class feedback(models.Model):
+
+    SCORE_CHOICES = (
+        (5, 5),
+        (4, 4),
+        (3, 3),
+        (2, 2),
+        (1, 1),
+    )
+
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movies, related_name='ratings', on_delete=models.CASCADE)
+    rating = models.PositiveSmallIntegerField(choices=SCORE_CHOICES, null=True)
+
+    def __str__(self):
+        return '{} rated on {}'. format(self.user, self.movie)
