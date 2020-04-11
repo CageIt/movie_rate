@@ -9,10 +9,12 @@ class Movies(models.Model):
 
     # movie title
     title  = models.CharField(max_length=255, null=False, blank=False)
-    # movie genre
-    genre = models.CharField(null=True, blank=True, max_length=100)
+
     # name of the director(s)
     director = models.CharField(max_length=255,null=False, blank=False)
+    # movie genre
+    genre = models.CharField(null=True, blank=True, max_length=100)
+
     # name of the producer(s)
     producer = models.TextField(null=True ,blank=True)
     # release year
@@ -33,11 +35,19 @@ class Movies(models.Model):
 
 
 
-class Discussions(models.Model):
+class Feedback(models.Model):
 
-
+    SCORE_CHOICES = (
+        (5, 5),
+        (4, 4),
+        (3, 3),
+        (2, 2),
+        (1, 1),
+    )
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     movie = models.ForeignKey(Movies, related_name='comments', on_delete=models.CASCADE)
+    rating = models.PositiveSmallIntegerField(choices=SCORE_CHOICES)
+    status = models.BooleanField(default=True)
     discuss = models.TextField(blank=True)
 
     # uploaded Date
@@ -49,21 +59,3 @@ class Discussions(models.Model):
 
     def __str__(self):
         return '{}: {} '.format(self.user, self.discuss)
-
-
-class feedback(models.Model):
-
-    SCORE_CHOICES = (
-        (5, 5),
-        (4, 4),
-        (3, 3),
-        (2, 2),
-        (1, 1),
-    )
-
-    user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movies, related_name='ratings', on_delete=models.CASCADE)
-    rating = models.PositiveSmallIntegerField(choices=SCORE_CHOICES, null=True)
-
-    def __str__(self):
-        return '{} rated on {}'. format(self.user, self.movie)
