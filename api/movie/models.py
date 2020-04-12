@@ -46,8 +46,8 @@ class Feedback(models.Model):
     )
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     movie = models.ForeignKey(Movies, related_name='comments', on_delete=models.CASCADE)
-    rating = models.PositiveSmallIntegerField(choices=SCORE_CHOICES)
-    status = models.BooleanField(default=True)
+    rating = models.PositiveSmallIntegerField(choices=SCORE_CHOICES, null=False)
+    status = models.BooleanField(default=False)
     discuss = models.TextField(blank=True)
 
     # uploaded Date
@@ -55,7 +55,7 @@ class Feedback(models.Model):
 
     class Meta:
         ordering = ('created', )
-        unique_together = ['movie', 'discuss']
+        unique_together = ['movie', 'rating', 'discuss']
 
     def __str__(self):
         return '{}: {} '.format(self.user, self.discuss)
