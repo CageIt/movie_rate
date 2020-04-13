@@ -26,20 +26,39 @@ class MovieListSerialzier(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'title', 'year', 'movie_url')
 
 class MovieSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
+    #owner = serializers.ReadOnlyField(source='owner.username')
     comments = serializers.StringRelatedField(many=True, read_only=True)
-    rating = serializers.SerializerMethodField()
+    all_rating = serializers.SerializerMethodField()
+    rating_avg = serializers.SerializerMethodField()
+    review_url = serializers.HyperlinkedIdentityField(view_name='review-list', format='html')
 
-    
+
 
     class Meta:
         model = Movies
 
-        fields = ('id', 'title', 'genre', 'director', 'producer', 'year', 'summary', 'owner', 'rating', 'comments')
+        fields = ('id', 'title', 'genre', 'director', 'producer', 'year', 'summary', 'review_url', 'rating_avg', 'all_rating', 'comments')
 
-    def get_rating(self, obj):
-        rating = Feedback.objects.values('rating').annotate(rate_count=Count('rating'))
-        return rating
+
+    def get_all_rating(self,obj):
+        all_rating = {
+            5 : obj.comments.filter(rating=5).count(),
+            4 : obj.comments.filter(rating=4).count(),
+            3 : obj.comments.filter(rating=3).count(),
+            2 : obj.comments.filter(rating=2).count(),
+            1 : obj.comments.filter(rating=1).count(),
+        }
+        return all_rating
+
+
+
+
+    def get_rating_avg(self, obj):
+        average = obj.comments.values('rating').aggregate(Avg('rating')).get('rating__avg')
+        if average == 0:
+            return 0
+        return ("%.2f" % average)
+
 
 
 

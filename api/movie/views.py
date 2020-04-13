@@ -12,8 +12,8 @@ from .models import *
 from .permissions import *
 from .serializers import *
 # Create your views here.
-rate_count_dict = Feedback.objects.values('rating').annotate(rate_count=Count('rating'))
-rate_avg = Feedback.objects.values('rating').annotate(avg=Avg('rating'))
+
+
 
 
 @api_view(['GET'])
@@ -37,7 +37,6 @@ class MoviesDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Movies.objects.all()
     serializer_class = MovieSerializer
     permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly|IsAuthenticatedAndReadOnly&permissions.IsAdminUser,)
-
 
 
 class FeedbackList(generics.ListCreateAPIView):
