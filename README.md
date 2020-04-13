@@ -1,23 +1,36 @@
-Project : Movie Mania (Django REST version)
+# Movie Mania (Django REST version)
 Programmer: Panut Sasanaputchot
 
 Date: 13/04/2020
+
 Duration: 5 - 13/04/2020 (8 days)
+
 Purpose: Write a web application (back-end) to create a list of movie to rate and comment the movie
 
-Users:
+Users
+
 Admin:
+
 Username = admin
+
 Password = adminpass123
 
 Member:
+
 testuser1
+
 testuser2
+
 testuser3
+
 testuser4
+
 testuser5
+
 testuser6
+
 testuser7
+
 password = testpass123
 
 Link Map(All User):
