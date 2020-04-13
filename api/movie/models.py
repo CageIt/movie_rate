@@ -26,7 +26,7 @@ class Movies(models.Model):
 
     #feedback  = models.ForeignKey('feedback', on_delete=models.SET_DEFAULT, null=True,blank=True, default="NA")
     #comments = models.ForeignKey('discussions', on_delete=models.SET_DEFAULT, null=True, default="NA")
-    
+
 
     class Meta:
         ordering = ('created', )
@@ -47,8 +47,8 @@ class Feedback(models.Model):
     )
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     movie = models.ForeignKey(Movies, related_name='comments', on_delete=models.CASCADE)
-    rating = models.PositiveSmallIntegerField(choices=SCORE_CHOICES, null=False)
-    #status = models.BooleanField(default=False)
+    rating = models.PositiveSmallIntegerField(choices=SCORE_CHOICES, null=False, blank=False)
+    status = models.BooleanField(default=False)
     discuss = models.TextField(blank=True)
 
     # uploaded Date

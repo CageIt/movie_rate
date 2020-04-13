@@ -28,7 +28,7 @@ def api_root(request, format=None):
 
 class ListMoviesView(generics.ListAPIView):
     """
-    Provides a get method handler
+    Provide A list of movies
     """
     queryset = Movies.objects.all()
     serializer_class = MovieListSerialzier
@@ -51,13 +51,11 @@ class FeedbackList(generics.ListCreateAPIView):
         return query_set
 
     def perform_create(self, serializer):
-        if not Feedback.objects.filter(user=self.request.user).exists:
-            serializer.save(
+        serializer.save(
                 user=self.request.user,
                 movie_id = self.kwargs.get('pk'),
             )
-        else:
-            raise ValidationError('User already reviewed!')
+
 
 
 class RegisterView(generics.CreateAPIView):
