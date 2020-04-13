@@ -53,14 +53,14 @@ password = testpass123
 
 Access Level:
 Guest: API root -> movie list -> movie detail(read only) -> review list (read only)<br/>
-       API root -> register<br/>
-Member: API root -> movie list -> movie detail(read only) -> review list<br/>
-        API root -> user list -> user detail (according to the login user)<br/>
         API root -> register<br/>
+Member: API root -> movie list -> movie detail(read only) -> review list<br/>
+          API root -> user list -> user detail (according to the login user)<br/>
+          API root -> register<br/>
 Admin: API root -> movie list -> movie detail(can edit and delete) -> review list<br/>
-       API root > user list -> user detail (can access all user profile and delete)<br/>
-       API root -> register<br/>
-       127.0.0.1/admin
+        API root > user list -> user detail (can access all user profile and delete)<br/>
+        API root -> register<br/>
+        127.0.0.1/admin
 
 
 Note: Create a new movie can only be done in admin site
