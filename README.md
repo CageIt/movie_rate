@@ -1,11 +1,26 @@
-# Movie Mania (Django REST version)
+## Movie Mania (Django REST version) 
+
+a web application (back-end) for reviewing the movies
+
+## Motivation 
+To practise how to use back-end framework and the basic of the programming language
+
+## Tech/framework used
+Python 3.8, Django REST Framework 3, sqlite3<br/>
+<b>Built with</b>
+[Atom](https://atom.io/)
+## Credits
+https://www.django-rest-framework.org/
+## License
+MIT © [Panut Sasanaputchot]()
+
 Programmer: Panut Sasanaputchot
 
 Date: 13/04/2020
 
 Duration: 5 - 13/04/2020 (8 days)
 
-Purpose: Write a web application (back-end) to create a list of movie to rate and comment the movie
+
 
 Users
 
