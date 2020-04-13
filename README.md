@@ -22,13 +22,13 @@ password = testpass123
 
 Link Map(All User):
 
-                                                                        Api_root(127.0.0.1)
-                                                                                |
-                                                  register(/register)   movie list(/movies)     user list(/users)
-                                                                                |                       |
-                                                                     movie detail(/movie id)    user detail(/user id)
-                                                                                |
-                                                                       Review list(/review)
+                                               Api_root(127.0.0.1)
+                                                       |
+                          register(/register)   movie list(/movies)     user list(/users)
+                                                       |                       |
+                                            movie detail(/movie id)    user detail(/user id)
+                                                       |
+                                                Review list(/review)
 
 Access Level:
 Guest: API root -> movie list -> movie detail(read only) -> review list (read only)
