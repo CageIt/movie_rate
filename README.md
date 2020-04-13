@@ -41,7 +41,7 @@ testuser7
 
 password = testpass123
 
-Link Map(All User):
+<br>Link Map(All User):</b>
 
                                                Api_root(127.0.0.1)
                                                        |
@@ -52,27 +52,27 @@ Link Map(All User):
                                                 Review list(/review)
 
 Access Level:
-Guest: API root -> movie list -> movie detail(read only) -> review list (read only)
-       API root -> register
-Member: API root -> movie list -> movie detail(read only) -> review list
-        API root -> user list -> user detail (according to the login user)
-        API root -> register
-Admin: API root -> movie list -> movie detail(can edit and delete) -> review list
-       API root > user list -> user detail (can access all user profile and delete)
-       API root -> register
+Guest: API root -> movie list -> movie detail(read only) -> review list (read only)<br/>
+       API root -> register<br/>
+Member: API root -> movie list -> movie detail(read only) -> review list<br/>
+        API root -> user list -> user detail (according to the login user)<br/>
+        API root -> register<br/>
+Admin: API root -> movie list -> movie detail(can edit and delete) -> review list<br/>
+       API root > user list -> user detail (can access all user profile and delete)<br/>
+       API root -> register<br/>
        127.0.0.1/admin
 
 
 Note: Create a new movie can only be done in admin site
 
 ## How to use
-1. install Python
-  1.1 make build path for Python
-  1.2 make build path for pip
+1. install Python<br/>
+  1.1 make build path for Python<br/>
+  1.2 make build path for pip><br/>
 2. install django rest framework by type pip install djangorestframework in cmd
 3  after installation you locate your download file in cmd
 4. type python manage.py runserver
-5. type 127.0.0.1 in any browser engine
+5. type 127.0.0.1 in any browser engine<br/>
   5.1 You can type 127.0.0.1/admin also if you want to work as an Administrator
 6. enjoy the application!
 
