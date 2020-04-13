@@ -9,19 +9,12 @@ To practise how to use back-end framework and the basic of the programming langu
 Python 3.8, Django REST Framework 3, sqlite3<br/>
 <b>Built with</b>
 [Atom](https://atom.io/)
-## Credits
-https://www.django-rest-framework.org/
-## License
-MIT © [Panut Sasanaputchot]()
 
-Programmer: Panut Sasanaputchot
-
-Date: 13/04/2020
-
+## Status : Complete
+Date: 13/04/2020<br/>
 Duration: 5 - 13/04/2020 (8 days)
 
-
-
+## Information
 Users
 
 Admin:
@@ -71,3 +64,26 @@ Admin: API root -> movie list -> movie detail(can edit and delete) -> review lis
 
 
 Note: Create a new movie can only be done in admin site
+
+## How to use
+1. install Python
+  1.1 make build path for Python
+  1.2 make build path for pip
+2. install django rest framework by type pip install djangorestframework in cmd
+3  after installation you locate your download file in cmd
+4. type python manage.py runserver
+5. type 127.0.0.1 in any browser engine
+  5.1 You can type 127.0.0.1/admin also if you want to work as an Administrator
+6. enjoy the application!
+
+
+## Credits
+https://www.django-rest-framework.org/
+## License
+MIT © [Panut Sasanaputchot]()
+
+
+
+
+
+
