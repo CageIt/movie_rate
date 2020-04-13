@@ -19,9 +19,12 @@ from .serializers import *
 @api_view(['GET'])
 def api_root(request, format=None):
     return Response({
+        'register': reverse('Register-User',request=request, format=format),
         'users': reverse('user-list', request=request, format=format),
         'movies': reverse('movie-list', request=request, format=format),
+
     })
+
 
 class ListMoviesView(generics.ListAPIView):
     """
@@ -47,15 +50,7 @@ class FeedbackList(generics.ListCreateAPIView):
         query_set = Feedback.objects.filter(movie_id=token)
         return query_set
 
-
-
-
-
-
-
     def perform_create(self, serializer):
-
-
         if not Feedback.objects.filter(user=self.request.user).exists:
             serializer.save(
                 user=self.request.user,
@@ -65,11 +60,17 @@ class FeedbackList(generics.ListCreateAPIView):
             raise ValidationError('User already reviewed!')
 
 
+class RegisterView(generics.CreateAPIView):
+    model = User
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = CreateUserSerializer
 
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserListSerialziers
     permission_classes = (permissions.IsAuthenticated,)
+
+
 
 class UserDetail(generics.RetrieveDestroyAPIView):
     queryset = User.objects.all()

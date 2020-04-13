@@ -5,6 +5,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns=[
     path('', views.api_root),
+    path('register/', views.RegisterView.as_view(), name='Register-User'),
     path('movies/', views.ListMoviesView.as_view(), name="movie-list"),
     path('movies/<int:pk>/', views.MoviesDetail.as_view(), name="movie-detail"),
     path('movies/<int:pk>/review', views.FeedbackList.as_view(), name="review-list"),
